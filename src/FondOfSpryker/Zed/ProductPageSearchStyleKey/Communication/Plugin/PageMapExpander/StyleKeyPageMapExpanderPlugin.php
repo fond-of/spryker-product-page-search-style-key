@@ -21,7 +21,11 @@ class StyleKeyPageMapExpanderPlugin extends AbstractPlugin implements ProductPag
      */
     public function expandProductPageMap(PageMapTransfer $pageMapTransfer, PageMapBuilderInterface $pageMapBuilder, array $productData, LocaleTransfer $localeTransfer): PageMapTransfer
     {
-        if (!array_key_exists(PageIndexMap::STYLE_KEY, $productData)) {
+        if (!array_key_exists('attributes', $productData)) {
+            return $pageMapTransfer;
+        }
+
+        if (!array_key_exists(PageIndexMap::STYLE_KEY, $productData['attributes'])) {
             return $pageMapTransfer;
         }
 
@@ -55,6 +59,6 @@ class StyleKeyPageMapExpanderPlugin extends AbstractPlugin implements ProductPag
      */
     protected function addStyleKeyToSearchResult(PageMapTransfer $pageMapTransfer, PageMapBuilderInterface $pageMapBuilder, array $productData): void
     {
-        $pageMapBuilder->addSearchResultData($pageMapTransfer, PageIndexMap::STYLE_KEY, $productData[PageIndexMap::STYLE_KEY]);
+        $pageMapBuilder->addSearchResultData($pageMapTransfer, PageIndexMap::STYLE_KEY, $pageMapTransfer->getStyleKey());
     }
 }
