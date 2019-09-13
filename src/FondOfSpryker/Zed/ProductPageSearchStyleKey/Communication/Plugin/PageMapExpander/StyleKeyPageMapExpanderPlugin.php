@@ -34,7 +34,6 @@ class StyleKeyPageMapExpanderPlugin extends AbstractPlugin implements ProductPag
         }
 
         $this->addStyleKeyToPageMapTransfer($pageMapTransfer, $productData);
-        $this->addStyleKeyToSearchResult($pageMapTransfer, $pageMapBuilder, $productData);
 
         return $pageMapTransfer;
     }
@@ -47,18 +46,6 @@ class StyleKeyPageMapExpanderPlugin extends AbstractPlugin implements ProductPag
      */
     protected function addStyleKeyToPageMapTransfer(PageMapTransfer $pageMapTransfer, array $productData): void
     {
-        $pageMapTransfer->setModelKey($productData[PageIndexMap::STYLE_KEY]);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\PageMapTransfer $pageMapTransfer
-     * @param \Spryker\Zed\Search\Business\Model\Elasticsearch\DataMapper\PageMapBuilderInterface $pageMapBuilder
-     * @param array $productData
-     *
-     * @return void
-     */
-    protected function addStyleKeyToSearchResult(PageMapTransfer $pageMapTransfer, PageMapBuilderInterface $pageMapBuilder, array $productData): void
-    {
-        $pageMapBuilder->addSearchResultData($pageMapTransfer, PageIndexMap::STYLE_KEY, $pageMapTransfer->getStyleKey());
+        $pageMapTransfer->setStyleKey($productData['attributes'][PageIndexMap::STYLE_KEY]);
     }
 }

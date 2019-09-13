@@ -23,16 +23,16 @@ class StyleKeyDataExpanderPlugin extends AbstractPlugin implements ProductPageDa
             return;
         }
 
-        $attributesData = \json_decode($productData['attributes'], true);
+        $productAttributesData = \json_decode($productData['attributes'], true);
 
-        if (!array_key_exists(PageIndexMap::STYLE_KEY, $attributesData)) {
+        if (!array_key_exists(PageIndexMap::STYLE_KEY, $productAttributesData)) {
             return;
         }
 
-        if (!method_exists($productAbstractPageSearchTransfer, 'setModelKey')) {
+        if (!method_exists($productAbstractPageSearchTransfer, 'setStyleKey')) {
             return;
         }
 
-        $productAbstractPageSearchTransfer->setModelKey($attributesData[PageIndexMap::STYLE_KEY]);
+        $productAbstractPageSearchTransfer->setStyleKey($productAttributesData[PageIndexMap::STYLE_KEY]);
     }
 }
