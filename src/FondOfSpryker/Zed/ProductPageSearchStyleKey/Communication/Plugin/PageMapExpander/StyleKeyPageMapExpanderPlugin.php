@@ -2,6 +2,7 @@
 
 namespace FondOfSpryker\Zed\ProductPageSearchStyleKey\Communication\Plugin\PageMapExpander;
 
+use FondOfSpryker\Shared\ProductPageSearchStyleKey\ProductPageSearchStyleKeyConstants;
 use Generated\Shared\Search\PageIndexMap;
 use Generated\Shared\Transfer\LocaleTransfer;
 use Generated\Shared\Transfer\PageMapTransfer;
@@ -21,11 +22,11 @@ class StyleKeyPageMapExpanderPlugin extends AbstractPlugin implements ProductPag
      */
     public function expandProductPageMap(PageMapTransfer $pageMapTransfer, PageMapBuilderInterface $pageMapBuilder, array $productData, LocaleTransfer $localeTransfer): PageMapTransfer
     {
-        if (!array_key_exists('attributes', $productData)) {
+        if (!array_key_exists(ProductPageSearchStyleKeyConstants::ATTRIBUTES, $productData)) {
             return $pageMapTransfer;
         }
 
-        if (!array_key_exists(PageIndexMap::STYLE_KEY, $productData['attributes'])) {
+        if (!array_key_exists(PageIndexMap::STYLE_KEY, $productData[ProductPageSearchStyleKeyConstants::ATTRIBUTES])) {
             return $pageMapTransfer;
         }
 
@@ -46,6 +47,6 @@ class StyleKeyPageMapExpanderPlugin extends AbstractPlugin implements ProductPag
      */
     protected function addStyleKeyToPageMapTransfer(PageMapTransfer $pageMapTransfer, array $productData): void
     {
-        $pageMapTransfer->setStyleKey($productData['attributes'][PageIndexMap::STYLE_KEY]);
+        $pageMapTransfer->setStyleKey($productData[ProductPageSearchStyleKeyConstants::ATTRIBUTES][PageIndexMap::STYLE_KEY]);
     }
 }

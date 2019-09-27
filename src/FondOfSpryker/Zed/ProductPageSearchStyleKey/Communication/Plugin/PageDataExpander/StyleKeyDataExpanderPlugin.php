@@ -2,6 +2,7 @@
 
 namespace FondOfSpryker\Zed\ProductPageSearchStyleKey\Communication\Plugin\PageDataExpander;
 
+use FondOfSpryker\Shared\ProductPageSearchStyleKey\ProductPageSearchStyleKeyConstants;
 use Generated\Shared\Search\PageIndexMap;
 use Generated\Shared\Transfer\ProductPageSearchTransfer;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
@@ -19,11 +20,11 @@ class StyleKeyDataExpanderPlugin extends AbstractPlugin implements ProductPageDa
      */
     public function expandProductPageData(array $productData, ProductPageSearchTransfer $productAbstractPageSearchTransfer): void
     {
-        if (!array_key_exists('attributes', $productData)) {
+        if (!array_key_exists(ProductPageSearchStyleKeyConstants::ATTRIBUTES, $productData)) {
             return;
         }
 
-        $productAttributesData = \json_decode($productData['attributes'], true);
+        $productAttributesData = \json_decode($productData[ProductPageSearchStyleKeyConstants::ATTRIBUTES], true);
 
         if (!array_key_exists(PageIndexMap::STYLE_KEY, $productAttributesData)) {
             return;
